@@ -1,0 +1,7 @@
+intaro_book_store_hello:
+    path:     /hello/{name}
+    defaults: { _controller: IntaroBookStoreBundle:Default:index }
+
+intaro_book_store_index:
+    path:     /
+    defaults: { _controller: IntaroBookStoreBundle:Default:show }
