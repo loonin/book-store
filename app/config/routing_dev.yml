@@ -19,3 +19,6 @@ _main:
 
 _intaro_book_store:
     resource: "@IntaroBookStoreBundle/Resources/config/routing.yml"
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Личная библиотека книг</title>
+</head>
+<body>
+<h1>Редактирование книги</h1>
+<form action="{{ path('book_store_edit', {'id': book.getId}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.author) }}
+
+    {% if book.cover %}
+        <img src="{{ book.getWebPath('cover') }}"><br>
+        <a href="{{ path('book_store_delete_file', {
+            'id': book.getId,
+            'type': 'cover',
+        }) }}">Удалить обложку</a>
+        <div style="display: none">{{ form_row(form.cover_src) }}</div>
+    {% else %}
+        {{ form_row(form.cover_src) }}
+    {% endif %}
+
+    {% if book.file %}
+        <p><a href="{{ book.getWebPath('file') }}">Скачать файл</a></p>
+        <a href="{{ path('book_store_delete_file', {
+            'id': book.getId,
+            'type': 'file',
+        }) }}">Удалить файл</a>
+        <div style="display: none">{{ form_row(form.file_src) }}</div>
+    {% else %}
+        {{ form_row(form.file_src) }}
+    {% endif %}
+
+    {{ form_rest(form) }}
+
+    <input type="submit" value="Сохранить"/>
+</form>
+</body>
+</html>

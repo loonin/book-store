@@ -1,7 +1,31 @@
-intaro_book_store_hello:
-    path:     /hello/{name}
+book_store_index:
+    path:     /
     defaults: { _controller: IntaroBookStoreBundle:Default:index }
 
-intaro_book_store_index:
-    path:     /
-    defaults: { _controller: IntaroBookStoreBundle:Default:show }
+book_store_create:
+    path:     /create
+    defaults: { _controller: IntaroBookStoreBundle:Default:create }
+
+book_store_edit:
+    path:     /edit/{id}
+    defaults: { _controller: IntaroBookStoreBundle:Default:edit }
+
+book_store_delete:
+    path:     /delete/{id}
+    defaults: { _controller: IntaroBookStoreBundle:Default:delete }
+
+book_store_delete_file:
+    path:     /delete/{type}/{id}
+    defaults: { _controller: IntaroBookStoreBundle:Default:deleteFile }
+
+book_store_api_v1_books:
+    path:     /api/v1/books
+    defaults: { _controller: IntaroBookStoreBundle:Api:list }
+
+book_store_api_v1_books_edit:
+    path:     api/v1/books/{id}/edit
+    defaults: { _controller: IntaroBookStoreBundle:Api:edit }
+
+book_store_api_v1_books_add:
+    path:     /api/v1/books/add
+    defaults: { _controller: IntaroBookStoreBundle:Api:add }

@@ -1,1 +1,44 @@
-Hello {{ name }}!
+<html>
+<head>
+    <title>Личная библиотека книг</title>
+</head>
+<body>
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="flash-notice">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+{% if is_granted("ROLE_ADMIN") %}
+    <a href="{{ path('book_store_create') }}">Добавить книгу</a>
+{% endif %}
+<h1>Книги</h1>
+{% if books %}
+    <ul>
+        {% for book in books %}
+            <li>
+                <p><strong>{{ book.getName }}</strong></p>
+                <p>Автор: {{ book.getAuthor }}</p>
+
+                {% if book.getCover %}
+                    <p><img src="{{ book.getWebPath('cover') }}"></p>
+                {% endif %}
+
+                {% if book.getDownload == 1 and book.file %}
+                    <p><a href="{{ book.getWebPath('file') }}">Скачать</a></p>
+                {% endif %}
+
+                <p>Дата прочтения: {{ book.getReadingDate|date('Y.m.d H:i:s') }}</p>
+                <p>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <a href="{{ path('book_store_edit', {'id': book.getId}) }}">Редактировать</a>
+                        <a href="{{ path('book_store_delete', {'id': book.getId}) }}">Удалить</a>
+                    {% endif %}
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    Книг не найдено.
+{% endif %}
+</body>
+</html>

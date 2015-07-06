@@ -1,0 +1,221 @@
+<?php
+
+namespace Intaro\BookStoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Book
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Intaro\BookStoreBundle\Repository\BookRepository")
+ */
+class Book
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=255)
+     */
+    private $author;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cover", type="string", length=255)
+     */
+    private $cover;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file", type="string", length=255)
+     */
+    private $file;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="reading_date", type="datetime")
+     */
+    private $readingDate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="download", type="smallint")
+     */
+    private $download;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Book
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set author
+     *
+     * @param string $author
+     *
+     * @return Book
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set cover
+     *
+     * @param string $cover
+     *
+     * @return Book
+     */
+    public function setCover($cover)
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    /**
+     * Get cover
+     *
+     * @return string
+     */
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     *
+     * @return Book
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set readingDate
+     *
+     * @param \DateTime $readingDate
+     *
+     * @return Book
+     */
+    public function setReadingDate($readingDate)
+    {
+        $this->readingDate = $readingDate;
+
+        return $this;
+    }
+
+    /**
+     * Get readingDate
+     *
+     * @return \DateTime
+     */
+    public function getReadingDate()
+    {
+        return $this->readingDate;
+    }
+
+    /**
+     * Set download
+     *
+     * @param integer $download
+     *
+     * @return Book
+     */
+    public function setDownload($download)
+    {
+        $this->download = $download;
+
+        return $this;
+    }
+
+    /**
+     * Get download
+     *
+     * @return integer
+     */
+    public function getDownload()
+    {
+        return $this->download;
+    }
+}
+
