@@ -16,13 +16,12 @@ class DefaultController extends Controller
     {
         $memCache = $this->get('memcache.default');
         $books = $memCache->get('books');
-
         if (!$books) {
             $books = $this->getDoctrine()
                 ->getRepository('IntaroBookStoreBundle:Book')
-                ->findAllOrderedByName();
+                ->findAllOrderedByReadingDate();
 
-            $memCache->set('books', $books, 0, 60 * 60 * 24);
+            $memCache->set('books', $books, false, $this->container->getParameter('cache_time'));
         }
 
         return $this->render('IntaroBookStoreBundle:Default:index.html.twig', array('books' => $books));
@@ -129,6 +128,13 @@ class DefaultController extends Controller
             'notice',
             'Книга удалена.'
         );
+
+        $memCache = $this->get('memcache.default');
+
+        if ($memCache->get('books')) {
+            $memCache->set('books');
+        }
+
         return $this->redirect($this->generateUrl('book_store_index'));
     }
 
@@ -167,6 +173,12 @@ class DefaultController extends Controller
             'message' => 'Объект' . $type . ' для книги с id: ' . $id . ' удалён'
         ];
         $jsonContent = $serializer->serialize($data, 'json');
+
+        $memCache = $this->get('memcache.default');
+
+        if ($memCache->get('books')) {
+            $memCache->set('books');
+        }
 
         return new Response($jsonContent);
     }

@@ -182,8 +182,6 @@ class ApiController extends Controller
 
     private function checkApiKey($apiKey)
     {
-        $this->container->getParameter('api_key');
-
         return $this->container->getParameter('api_key') == $apiKey;
     }
 }

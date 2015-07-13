@@ -1,44 +1,57 @@
-<html>
-<head>
-    <title>Личная библиотека книг</title>
-</head>
-<body>
-{% for flashMessage in app.session.flashbag.get('notice') %}
-    <div class="flash-notice">
-        {{ flashMessage }}
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ parent() }} - Список книг{% endblock %}
+
+{% block body %}
+    <div class="sub-header">
+        {% if is_granted("ROLE_ADMIN") %}
+            <a href="{{ path('book_store_create') }}"><button type="button" class="btn btn-success">Добавить книгу</button></a>
+        {% endif %}
+
+        <h1>Список книг</h1>
     </div>
-{% endfor %}
-{% if is_granted("ROLE_ADMIN") %}
-    <a href="{{ path('book_store_create') }}">Добавить книгу</a>
-{% endif %}
-<h1>Книги</h1>
-{% if books %}
-    <ul>
-        {% for book in books %}
-            <li>
-                <p><strong>{{ book.getName }}</strong></p>
-                <p>Автор: {{ book.getAuthor }}</p>
+    {% if books %}
+            <div class="grid">
+            {% for book in books %}
+                <div class="book">
+                    <div class="book-image">
+                        {% if book.getCover %}
+                            <img src="{{ book.getWebPath('cover')|resize }}">
+                        {% endif %}
+                        <div class="book-date">
+                            <div class="book-date-inner">
+                                <i class="fa fa-calendar fa-1x"></i>
+                                <div class="book-date-inner-text">
+                                    {{ book.getReadingDate|date('d.m.Y') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="book-author">{{ book.getAuthor }}</div>
+                    <div class="book-name">{{ book.getName }}</div>
 
-                {% if book.getCover %}
-                    <p><img src="{{ book.getWebPath('cover') }}"></p>
-                {% endif %}
-
-                {% if book.getDownload == 1 and book.file %}
-                    <p><a href="{{ book.getWebPath('file') }}">Скачать</a></p>
-                {% endif %}
-
-                <p>Дата прочтения: {{ book.getReadingDate|date('Y.m.d H:i:s') }}</p>
-                <p>
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <a href="{{ path('book_store_edit', {'id': book.getId}) }}">Редактировать</a>
-                        <a href="{{ path('book_store_delete', {'id': book.getId}) }}">Удалить</a>
+                    {% if book.getDownload == 1 and book.file %}
+                        <div class="book-download">
+                            <a href="{{ book.getWebPath('file') }}" class="icon">
+                                <i class="fa fa-download fa-2x"></i>
+                            </a>
+                        </div>
                     {% endif %}
-                </p>
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    Книг не найдено.
-{% endif %}
-</body>
-</html>
+
+                    <div class="book-tools">
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a href="{{ path('book_store_edit', {'id': book.getId}) }}" class="icon">
+                                <i class="fa fa-pencil fa-2x"></i>
+                            </a>
+                            <a href="{{ path('book_store_delete', {'id': book.getId}) }}" class="icon">
+                                <i class="fa fa-trash-o fa-2x"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+    {% else %}
+        Книг не найдено.
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,139 @@
+* {
+  box-sizing: content-box;
+}
+body {
+  margin: 0;
+  background: url('../images/bg-body.jpg') top left;
+}
+.icon {
+  text-align: center;
+  width: 30px;
+  color: #000 !important;
+  background: #fff;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 5px;
+}
+.icon:hover,
+.icon:active,
+.icon:focus {
+  color: inherit;
+}
+.icon-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+header {
+  height: 126px;
+  background: url('../images/bg-header.jpg') top left repeat-x;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+header .logo {
+  position: relative;
+  top: 35px;
+  left: 30px;
+  width: 500px;
+}
+.content {
+  padding: 20px;
+}
+.sub-header {
+  margin-left: 20px;
+}
+h1 {
+  color: #5e2e06;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 35px;
+  font-weight: normal;
+  margin: 15px 0 10px;
+}
+.book {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 25px;
+  float: left;
+  margin: 20px;
+  width: 240px;
+}
+.book-image {
+  position: relative;
+  min-height: 30px;
+}
+.book-date {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 13px;
+  font-style: italic;
+  text-align: right;
+}
+.book-date-inner {
+  margin: 5px 10px;
+}
+.book-date-inner-text {
+  margin-left: 7px;
+  display: inline-block;
+}
+.book-author {
+  color: #a55c1e;
+  font-size: 13px;
+  font-style: italic;
+  margin-top: 20px;
+}
+.book-name {
+  color: #5e2e06;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 21px;
+  margin: 15px 0;
+}
+.book-download {
+  width: 40px;
+  float: left;
+}
+.book-tools {
+  width: 90px;
+  float: right;
+}
+.book-form {
+  margin-left: 20px;
+  width: 500px;
+}
+.book-form-row {
+  margin-bottom: 10px;
+}
+.book-form-row label {
+  color: #5e2e06;
+}
+.book-form-row-cover {
+  position: relative;
+  width: 240px;
+}
+.book-form input.form-control {
+  height: 20px;
+}
+.book-form .bootstrap-filestyle {
+  display: block !important;
+}
+.book-form .bootstrap-filestyle input.form-control {
+  width: 200px;
+}
+.book-form .bootstrap-filestyle .glyphicon {
+  margin-right: 3px;
+}
+.book-form .bootstrap-filestyle label {
+  color: #000;
+}
+.book-form .checkbox label {
+  font-weight: bold;
+}
+.ui-datepicker {
+  z-index: 100 !important;
+}

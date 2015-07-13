@@ -21,7 +21,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "leaseweb/memcache-bundle": "*",
         "ircmaxell/password-compat": "^1.0",
-        "jms/serializer": "^1.0"
+        "jms/serializer": "^1.0",
+        "gregwar/image": "2.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

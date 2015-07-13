@@ -13,7 +13,12 @@ class BookType extends AbstractType
         $builder->add('author', null, array('label' => 'Автор'));
         $builder->add('cover_src', null, array('label' => 'Обложка'));
         $builder->add('file_src', null, array('label' => 'Файл книги'));
-        $builder->add('reading_date', 'datetime', array('label' => 'Дата прочтения'));
+        $builder->add('reading_date', 'date',
+            array(
+                'label' => 'Дата прочтения',
+                'widget' => 'single_text',
+                'format' => 'dd.MM.yyyy'
+            ));
         $builder->add('download', 'checkbox',
             array(
                 'label' => 'Разрешить скачивание',

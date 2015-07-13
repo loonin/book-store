@@ -13,4 +13,11 @@ class BookRepository extends EntityRepository
             ->createQuery('SELECT b FROM IntaroBookStoreBundle:Book b ORDER BY b.name ASC')
             ->getResult();
     }
+
+    public function findAllOrderedByReadingDate()
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT b FROM IntaroBookStoreBundle:Book b ORDER BY b.reading_date DESC')
+            ->getResult();
+    }
 } 

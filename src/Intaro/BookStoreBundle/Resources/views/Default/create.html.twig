@@ -1,13 +1,74 @@
-<html>
-<head>
-    <title>Личная библиотека книг</title>
-</head>
-<body>
-<h1>Добавить книгу</h1>
-<form action="{{ path('book_store_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+{% extends '::base.html.twig' %}
 
-    <input type="submit" value="Добавить"/>
-</form>
-</body>
-</html>
+{% block title %}{{ parent() }} - Добавление книгу{% endblock %}
+
+{% block body %}
+    <div class="sub-header">
+        <a href="{{ path('book_store_index') }}"><button type="button" class="btn btn-info">< Вернуться</button></a>
+
+        <h1>Добавление книги</h1>
+    </div>
+    <div class="book-form">
+        <form action="{{ path('book_store_create') }}" method="post" {{ form_enctype(form) }}>
+            {{ form_errors(form) }}
+
+            <div class="book-form-row">
+                {{ form_label(form.name) }}
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name, {
+                    'attr': {
+                        'class': 'form-control'
+                    }
+                }) }}
+            </div>
+
+            <div class="book-form-row">
+                {{ form_label(form.author) }}
+                {{ form_errors(form.author) }}
+                {{ form_widget(form.author, {
+                    'attr': {
+                        'class': 'form-control'
+                    }
+                }) }}
+            </div>
+
+            <div class="book-form-row">
+                {{ form_label(form.cover_src) }}
+                {{ form_errors(form.cover_src) }}
+                {{ form_widget(form.cover_src, {
+                    'attr': {
+                        'class': 'filestyle',
+                        'data-buttonText': 'Выбрать файл'
+                    }
+                }) }}
+            </div>
+
+            <div class="book-form-row">
+                {{ form_label(form.file_src) }}
+                {{ form_errors(form.file_src) }}
+                {{ form_widget(form.file_src, {
+                    'attr': {
+                        'class': 'filestyle',
+                        'data-buttonText': 'Выбрать файл'
+                    }
+                }) }}
+            </div>
+
+            <div class="book-form-row">
+                {{ form_label(form.reading_date) }}<br>
+                {{ form_errors(form.reading_date) }}
+                {{ form_widget(form.reading_date) }}
+            </div>
+
+            <div class="book-form-row checkbox">
+                {{ form_errors(form.download) }}
+                {{ form_widget(form.download) }}
+                {{ form_label(form.download) }}
+            </div>
+
+            {{ form_rest(form) }}
+
+            <input class="btn btn-success" type="submit" value="Добавить"/>
+        </form>
+    </div>
+{% endblock %}

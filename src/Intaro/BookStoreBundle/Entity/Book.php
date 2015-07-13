@@ -67,9 +67,9 @@ class Book
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="reading_date", type="datetime")
+     * @ORM\Column(name="reading_date", type="date")
      */
-    private $readingDate;
+    private $reading_date;
 
     /**
      * @var integer
@@ -194,7 +194,7 @@ class Book
      */
     public function setReadingDate($readingDate)
     {
-        $this->readingDate = $readingDate;
+        $this->reading_date = $readingDate;
 
         return $this;
     }
@@ -206,7 +206,7 @@ class Book
      */
     public function getReadingDate()
     {
-        return $this->readingDate;
+        return $this->reading_date;
     }
 
     /**
@@ -329,7 +329,7 @@ class Book
             $pathSrc = $path . '_src';
 
             if ($this->$pathSrc === null) {
-                return;
+                continue;
             }
 
             $namePieces = explode('/', $this->$path);

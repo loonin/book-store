@@ -1,40 +1,107 @@
-<html>
-<head>
-    <title>Личная библиотека книг</title>
-</head>
-<body>
-<h1>Редактирование книги</h1>
-<form action="{{ path('book_store_edit', {'id': book.getId}) }}" method="post" {{ form_enctype(form) }}>
-    {{ form_errors(form) }}
+{% extends '::base.html.twig' %}
 
-    {{ form_row(form.name) }}
-    {{ form_row(form.author) }}
+{% block title %}{{ parent() }} - Редактирование книги{% endblock %}
 
-    {% if book.cover %}
-        <img src="{{ book.getWebPath('cover') }}"><br>
-        <a href="{{ path('book_store_delete_file', {
-            'id': book.getId,
-            'type': 'cover',
-        }) }}">Удалить обложку</a>
-        <div style="display: none">{{ form_row(form.cover_src) }}</div>
-    {% else %}
-        {{ form_row(form.cover_src) }}
-    {% endif %}
+{% block body %}
+    <div class="sub-header">
+        <a href="{{ path('book_store_index') }}"><button type="button" class="btn btn-info">< Вернуться</button></a>
 
-    {% if book.file %}
-        <p><a href="{{ book.getWebPath('file') }}">Скачать файл</a></p>
-        <a href="{{ path('book_store_delete_file', {
-            'id': book.getId,
-            'type': 'file',
-        }) }}">Удалить файл</a>
-        <div style="display: none">{{ form_row(form.file_src) }}</div>
-    {% else %}
-        {{ form_row(form.file_src) }}
-    {% endif %}
+        <h1>Редактирование книги</h1>
+    </div>
+    <div class="book-form">
+        <form action="{{ path('book_store_edit', {'id': book.getId}) }}" method="post" {{ form_enctype(form) }}>
+            {{ form_errors(form) }}
 
-    {{ form_rest(form) }}
+            <div class="book-form-row">
+                {{ form_label(form.name) }}
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name, {
+                'attr': {
+                'class': 'form-control'
+                }
+                }) }}
+            </div>
 
-    <input type="submit" value="Сохранить"/>
-</form>
-</body>
-</html>
+            <div class="book-form-row">
+                {{ form_label(form.author) }}
+                {{ form_errors(form.author) }}
+                {{ form_widget(form.author, {
+                'attr': {
+                'class': 'form-control'
+                }
+                }) }}
+            </div>
+
+            <div class="book-form-row">
+                {{ form_label(form.cover_src) }}<br>
+                {{ form_errors(form.cover_src) }}
+
+                {% set displayCover = '' %}
+                {% if book.cover %}
+                    <div class="book-form-row-cover">
+                        <img src="{{ book.getWebPath('cover')|resize }}">
+                        <a href="{{ path('book_store_delete_file', {
+                            'id': book.getId,
+                            'type': 'cover'
+                        }) }}" class="icon icon-close js-delete" data-object-type="cover"><i class="fa fa-trash-o fa-2x"></i></a>
+                    </div>
+
+                    {% set displayCover = 'style="display: none"' %}
+                {% endif %}
+
+                <div {{ displayCover|raw }} id="field-cover">
+                    {{ form_widget(form.cover_src, {
+                    'attr': {
+                    'class': 'filestyle',
+                    'data-buttonText': 'Выбрать файл'
+                    }
+                    }) }}
+                </div>
+            </div>
+
+            <div class="book-form-row">
+                {{ form_label(form.file_src) }}<br>
+                {{ form_errors(form.file_src) }}
+
+                {% set displayFile = '' %}
+                {% if book.file %}
+                    <div class="book-form-row-file">
+                        <a href="{{ book.getWebPath('file') }}" class="icon">
+                            <i class="fa fa-download fa-2x"></i>
+                        </a>
+                        <a href="{{ path('book_store_delete_file', {
+                            'id': book.getId,
+                            'type': 'file',
+                        }) }}" class="icon icon-close js-delete" data-object-type="file"><i class="fa fa-trash-o fa-2x"></i></a>
+                    </div>
+                    {% set displayFile = 'style="display: none"' %}
+                {% endif %}
+
+                <div {{ displayFile|raw }} id="field-file">
+                    {{ form_widget(form.file_src, {
+                        'attr': {
+                            'class': 'filestyle',
+                            'data-buttonText': 'Выбрать файл'
+                        }
+                    }) }}
+                </div>
+            </div>
+
+            <div class="book-form-row">
+                {{ form_label(form.reading_date) }}<br>
+                {{ form_errors(form.reading_date) }}
+                {{ form_widget(form.reading_date) }}
+            </div>
+
+            <div class="book-form-row checkbox">
+                {{ form_errors(form.download) }}
+                {{ form_widget(form.download) }}
+                {{ form_label(form.download) }}
+            </div>
+
+            {{ form_rest(form) }}
+
+            <input class="btn btn-success" type="submit" value="Сохранить"/>
+        </form>
+    </div>
+{% endblock %}
